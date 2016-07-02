@@ -6,7 +6,15 @@ var ajax = (method, url, data = {}, headers = {'Accept': 'application/json', 'Co
     headers: headers,
     credentials: 'same-origin',
     body: data
-  }).then(res => res.json())
+  }).then(res => {
+    return new Promise((resolve, reject) => {
+      if (res.status === 200) {
+        resolve(res.json())
+      } else {
+        reject(res)
+      }
+    }) 
+  })
 }
 
 var api = {}
