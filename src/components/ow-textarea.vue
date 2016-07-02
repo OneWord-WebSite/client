@@ -1,5 +1,5 @@
 <template>
-  <textarea class="ow-textarea" :placeholder="holder" :name="name"></textarea>
+  <textarea class="ow-textarea" :placeholder="holder" :name="name" required="required"></textarea>
 </template>
 
 <script>
@@ -7,6 +7,11 @@ export default {
   data () {
     return {
       
+    }
+  },
+  methods: {
+    isVaild() {
+      return this.$el.validationMessage
     }
   },
   ready: function() {

@@ -1,5 +1,5 @@
 <template>
-  <input class="ow-input" :placeholder="holder" :name="name"/>
+  <input class="ow-input" :placeholder="holder" :name="name" required="required" />
 </template>
 
 <script>
@@ -7,6 +7,11 @@ export default {
   data () {
     return {
       
+    }
+  },
+  methods: {
+    isVaild() {
+      return this.$el.validationMessage
     }
   },
   props: ['holder', 'name']

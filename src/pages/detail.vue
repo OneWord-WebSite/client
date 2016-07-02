@@ -1,6 +1,7 @@
 <template>
   <ow-header :back="back" :title="title" :logo="logo" :select="select" :avatar="avatar" :add="add" :initial="initial" title-name="一言"></ow-header>
   <main :style="{paddingTop: 2.275 + 'rem'}">
+    <img class="detail-preview" :src="roleAvatar">
     <section class="detail-word" v-show="word.id">
       <ow-praise :num="word.praises.length" :has-been-praised="hasBeenPraised" v-on:click.prevent="praiseHandler"></ow-praise>
       <div class="detail-tag">
@@ -14,7 +15,7 @@
       </p>
 
       <div class="avatar">
-        <ow-avatar size="1.2" src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3727048362,865765691&fm=58"></ow-avatar>
+        <ow-avatar size="1.2" :src="roleAvatar"></ow-avatar>
         <div class="avatar-name">{{word.role}}</div>
       </div>
       <div class="next" v-show="word.nextId">
@@ -58,6 +59,10 @@ export default {
 
     timeago: function() {
       return ta.format(this.word.createdAt, 'zh_CN')
+    },
+
+    roleAvatar: function() {
+      return `http://oneword.ufile.ucloud.com.cn/${this.word.pic}`
     }
   },
   methods: {
@@ -100,6 +105,12 @@ export default {
 
 <style>
 @import "../common/css/color.base.css";
+
+.detail-preview {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
 
 .detail-word {
   position: relative;

@@ -2,7 +2,7 @@
   <section class="ow-image-upload">
     <div class="pre-upload-image">
       <pre-upload-image size="5.5" :src="imageUrl"></pre-upload-image>
-      <input type="file" v-on:change="uploadImageHandler" :name="name" id="imageF">
+      <input type="file" v-on:change="uploadImageHandler" :name="name" required="required" id="file">
     </div>
     
   </section>
@@ -25,12 +25,16 @@ function dataURItoBlob(dataURI) {
 export default {
   data() {
     return {
-      imageUrl: "https://avatars3.githubusercontent.com/u/12003270?v=3&s=460"
+      imageUrl: "http://oneword.ufile.ucloud.com.cn/info.jpg"
     }
   },
   computed: {
     image: function() {
-      return dataURItoBlob(this.imageUrl)
+      if (this.imageUrl === "http://oneword.ufile.ucloud.com.cn/info.jpg") {
+        return null
+      } else {
+        return dataURItoBlob(this.imageUrl)
+      }
     }
   },
   methods: {
@@ -59,6 +63,10 @@ export default {
         }
         reader.readAsDataURL(file)
       }
+    },
+
+    isVaild: function() {
+      return file.validationMessage
     }
   },
   components: {

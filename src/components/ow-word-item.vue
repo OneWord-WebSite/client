@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="avatar">
-      <ow-avatar size="1.5" src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3727048362,865765691&fm=58"></ow-avatar>
+      <ow-avatar size="1.5" :src="roleAvatar"></ow-avatar>
       <div class="avatar-name">{{word.role}}</div>
     </div></a>
   </li>
@@ -44,6 +44,9 @@ export default {
   computed: {
     hasBeenPraised: function() {
       return this.word.praises.includes(+this.userId)
+    },
+    roleAvatar: function() {
+      return `http://oneword.ufile.ucloud.com.cn/${this.word.pic}`
     }
   },
   components: {

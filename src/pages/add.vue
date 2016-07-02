@@ -3,9 +3,9 @@
   <main :style="{paddingTop: 2.275 + 'rem'}">
     <form class="add-form" id="addForm">
       <ow-image-upload name="image" v-ref:image></ow-image-upload>
-      <ow-input holder="角色名称" name="role"></ow-input>
-      <ow-input holder="所属动漫" name="cartoon"></ow-input>
-      <ow-textarea holder="角色台词" name="word"></ow-textarea>
+      <ow-input holder="角色名称" name="role" v-ref:role></ow-input>
+      <ow-input holder="所属动漫" name="cartoon" v-ref:cartoon></ow-input>
+      <ow-textarea holder="角色台词" name="word" v-ref:word></ow-textarea>
       <input type="submit" value="添加" v-on:click.prevent="submitHandler"/>
       <p>
         你提交的东东，会被进行审核，审核通过后才会被展现，所以你不要提交一些奇奇怪怪的东西哦~🍭🍭🍭
@@ -21,6 +21,8 @@ import owTextarea from '../components/ow-textarea.vue'
 import owImageUpload from '../components/ow-image-upload.vue'
 import Api from '../api/index'
 
+
+
 export default {
   data () {
     return {
@@ -31,21 +33,44 @@ export default {
       avatar: 'visible',
       add: 'hidden',
       initial: 'visible',
+      canSubmit: true
     }
   },
   methods: {
-    submitHandler: function() {
-      this.$loading.show()
-      
-      let form = new FormData(addForm)
-      form.set('image', this.$refs.image.image, 'image.jpg')
+    isVaild: function() {
+      let validated = true
+      for (let item in this.$refs) {
+        if (this.$refs[item].isVaild() !== '') {
+          validated = false
+          break
+        }
+      }
+      return validated
+    },
 
-      Api
-        .addWord(form)
-        .then(data => {
-          this.$loading.hide()
-          this.$toast('添加成功')
-        })
+    submitHandler: function() {
+      if (this.canSubmit) {
+        
+        if (!this.isVaild()) {
+          return this.$toast('确认后再提交哦~')
+        }
+
+        this.canSubmit = false;
+        this.$loading.show()
+      
+        let form = new FormData(addForm)
+        form.set('image', this.$refs.image.image, 'image.jpg')
+        console.log(this.$refs.image.image)
+
+        Api
+          .addWord(form)
+          .then(data => {
+            this.canSubmit = true
+            this.$loading.hide()
+            this.$toast('添加成功')
+          })
+      }
+      
     }
   },
   components: {
