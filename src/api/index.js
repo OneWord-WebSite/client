@@ -1,7 +1,8 @@
 import weibo from './weibo'
 
-var ajax = (method, url, data = {}, headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}) => {
-  return fetch(url, {
+var ajax = (method, url, data = null, headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}) => {
+
+  let p = fetch(url, {
     method: method,
     headers: headers,
     credentials: 'same-origin',
@@ -15,6 +16,7 @@ var ajax = (method, url, data = {}, headers = {'Accept': 'application/json', 'Co
       }
     }) 
   })
+  return p
 }
 
 var api = {}
