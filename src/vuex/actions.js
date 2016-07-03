@@ -1,12 +1,12 @@
 import Api from '../api/'
 
-export const getUserInfo = (store) => {
+export const getUserInfo = (store, toLogin) => {
   Api.getUserInfo(store.state.userInfo.id).then(data => {
     store.dispatch('UPDATE_USER_INFO', {
       bio: data.bio
     })
   }, err => {
-    location.replace('/api/login')
+    toLogin()
   })
 }
 

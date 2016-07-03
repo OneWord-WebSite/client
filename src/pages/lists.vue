@@ -45,7 +45,6 @@ export default {
       logo: 'visible',
       back: 'hidden',
       title: 'hidden',
-      select: 'visible',
       avatar: 'visible',
       add: 'visible',
       initial: 'visible',

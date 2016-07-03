@@ -10,7 +10,9 @@ import Api from './api/'
 
 export default {
   ready: function () {
-    this.getUserInfo()
+    this.getUserInfo(() => {
+      this.$route.router.replace('login')
+    })
   },
   data () {
     return {}

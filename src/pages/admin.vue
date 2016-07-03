@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Api from './api/'
+import Api from '../api/'
 
 export default {
   ready() {
@@ -74,7 +74,7 @@ export default {
 }
 </script>
 
-<style src="./common/css/base.css"></style>
+<style src="../common/css/base.css"></style>
 <style>
 table {
   width: 100%;

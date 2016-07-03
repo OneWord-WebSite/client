@@ -57,7 +57,6 @@ export default {
       logo: 'hidden',
       back: 'visible',
       title: 'inherit',
-      select: 'hidden',
       avatar: 'inherit',
       add: 'hidden',
       initial: 'hidden',
