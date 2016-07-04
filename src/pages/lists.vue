@@ -24,7 +24,7 @@ export default {
       this.updateList()
     }
     
-    let bodyHeight = document.body.offsetHeight
+    let bodyHeight = screen.height
     let isLoading = false
 
     window.onscroll = () => {
