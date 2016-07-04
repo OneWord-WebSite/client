@@ -1,7 +1,7 @@
 <template>
   <li class="ow-word-item"><a v-link="{ path: `/detail/${word.id}` }">
     <div class="praise">
-      <ow-praise :num="word.praises.length" :has-been-praised="hasBeenPraised" :user-id="word.userId" :word-id="word.id" :cb="praiseHandler"></ow-praise>
+      <ow-praise :num="word.praises.length" :has-been-praised="hasBeenPraised" :word-id="word.id" :cb="praiseHandler"></ow-praise>
     </div>
     <div class="content">
       <p>{{word.word}}</p>
@@ -35,7 +35,8 @@ export default {
       d.id ? this.word.praises.push(d.userId) : this.word.praises.pop() 
       
       // todo: 
-      // let index = this.wordsList.find(value => value.id === d.wordId)
+      let index = this.wordsList.find(value => value.id === d.wordId)
+      // console.log(this.word.praises)
       // if (index) index.praises = this.word.praises 
 
       if (this.praiseClickHandler) this.praiseClickHandler() 

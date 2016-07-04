@@ -115,6 +115,7 @@ export default {
   position: relative;
   background-color: #FFF;
   padding: .5rem .3rem 1.5rem .3rem;
+  margin-top: -5px;
   margin-bottom: 2rem;
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 

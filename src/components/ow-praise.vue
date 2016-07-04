@@ -6,6 +6,7 @@
 
 <script>
 import Api from '../api/'
+import {userId} from '../vuex/getters'
 
 export default {
   data () {
@@ -19,19 +20,25 @@ export default {
       this.canPraise = false
       let praise = this.hasBeenPraised ? Api.praiseDown : Api.praiseUp
       let praiseInfo = this.hasBeenPraised ? '取消收藏成功' : '收藏成功'
+      // console.log(this)
       let reqData = {
         wordId: this.wordId,
-        userId: this.userId
+        userId: +this.userId
       }
       praise(reqData).then(d => {
         this.cb(d)
 
         this.$toast(praiseInfo)
         this.canPraise = true
-      })
+      }).catch(e => console.log())
     }
   },
-  props: ['num', 'hasBeenPraised', 'wordId', 'userId', 'cb']
+  vuex: {
+    getters: {
+      userId,
+    }
+  },
+  props: ['num', 'hasBeenPraised', 'wordId', 'cb']
 }
 </script>
 
