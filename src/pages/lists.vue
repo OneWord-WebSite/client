@@ -28,7 +28,7 @@ export default {
     let isLoading = false
 
     window.onscroll = () => {
-      console.log(loader.getBoundingClientRect().top <= bodyHeight)
+      console.log(loader.getBoundingClientRect().top, bodyHeight)
       if (loader.getBoundingClientRect().top <= bodyHeight && isLoading === false) {
         isLoading = true
         this.updateList(data => {
