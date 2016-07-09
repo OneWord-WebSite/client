@@ -3,7 +3,7 @@
   <main :style="{paddingTop: 2.275 + 'rem'}">
     <img class="detail-preview" :src="roleAvatar">
     <section class="detail-word" v-show="word.id">
-      <ow-praise :num="word.praises.length" :has-been-praised="hasBeenPraised" v-on:click.prevent="praiseHandler"></ow-praise>
+      <ow-praise :num="word.praises.length" :has-been-praised="hasBeenPraised" :word-id="word.id" :cb="praiseHandler"></ow-praise>
       <div class="detail-tag">
         <span class="cartoonname">{{word.cartoon}}</span>
         <ow-created-by :uid="word.userId"></ow-created-by>
@@ -31,7 +31,7 @@ import owPraise from '../components/ow-praise.vue'
 import owAvatar from '../components/ow-avatar.vue'
 import owCreatedBy from '../components/ow-created-by.vue'
 import Api from '../api/'
-import {userId} from '../vuex/getters'
+import {userId, wordsList} from '../vuex/getters'
 import timeAgo from 'timeago.js'
 
 let ta = timeAgo()
@@ -65,17 +65,15 @@ export default {
     }
   },
   methods: {
-    praiseHandler: function() {
-      let praise = this.hasBeenPraised ? Api.praiseDown : Api.praiseUp
-      let praiseInfo = this.hasBeenPraised ? '取消收藏成功' : '收藏成功'
-      let reqData = {
-        wordId: this.word.id,
-        userId: this.word.userId
-      }
-      praise(reqData).then(d => {
-        d.id ? this.word.praises.push(d.userId) : this.word.praises.pop()
-        this.$toast(praiseInfo)
-      })
+    praiseHandler: function(d) {
+      d.id ? this.word.praises.push(d.userId) : this.word.praises.pop() 
+      
+      // todo: 
+      let index = this.wordsList.find(value => value.id === d.wordId)
+      // console.log(this.word.praises)
+      // if (index) index.praises = this.word.praises 
+
+      if (this.praiseClickHandler) this.praiseClickHandler() 
     }
   },
   components: {
@@ -96,7 +94,8 @@ export default {
   },
   vuex: {
     getters: {
-      userId
+      userId,
+      wordsList
     }
   }
 }

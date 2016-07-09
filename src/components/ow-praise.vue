@@ -20,7 +20,6 @@ export default {
       this.canPraise = false
       let praise = this.hasBeenPraised ? Api.praiseDown : Api.praiseUp
       let praiseInfo = this.hasBeenPraised ? '取消收藏成功' : '收藏成功'
-      // console.log(this)
       let reqData = {
         wordId: this.wordId,
         userId: +this.userId
@@ -30,7 +29,7 @@ export default {
 
         this.$toast(praiseInfo)
         this.canPraise = true
-      }).catch(e => console.log())
+      }).catch(e => {throw e})
     }
   },
   vuex: {

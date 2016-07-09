@@ -1,6 +1,6 @@
 <template>
   <header class="ow-header" id="header" :style="{visibility: initial}">
-    <div class="ow-header-logo" :style="{visibility: logo}">一言</div>
+    <div class="ow-header-logo" :style="{visibility: logo}">壹言</div>
     <div class="ow-header-back" :style="{visibility: back}"><a v-link="{ path: '/' }">←</a></div>
     <a v-link="{ path: '/add' }" class="ow-header-add" :style="{visibility: add}">＋</a>
     <div class="ow-header-title" :style="{visibility: title}">{{titleName}}</div>
